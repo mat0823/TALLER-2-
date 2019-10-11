@@ -1,0 +1,45 @@
+int echo    = 8; 
+int trigger = 9;
+int red     = 7;
+int yellow  = 5;
+int blue    = 6;
+
+void setup() {
+  pinMode(9,OUTPUT);
+  pinMode(8,INPUT);
+  Serial.begin(9600);
+  pinMode(7,OUTPUT);
+  pinMode(5,OUTPUT);
+  pinMode(6,OUTPUT);
+}
+
+void loop() {
+  digitalWrite(9,LOW);
+  
+  delayMicroseconds(5);
+  digitalWrite(9,HIGH);
+  
+  delayMicroseconds(10);
+  long tiempo = pulseIn(8,HIGH);
+  long distancia = int(tiempo/59);
+  Serial.println("Distancia: ");
+  Serial.print(distancia);
+  Serial.print("cm");
+  Serial.println();
+  delay(1000);
+  if(distancia >= 200){
+    digitalWrite(blue,HIGH);
+    digitalWrite(red,LOW);
+    digitalWrite(yellow,LOW);
+    }
+  if(distancia >= 100 && distancia < 200){
+    digitalWrite(blue,LOW);
+    digitalWrite(red,LOW);
+    digitalWrite(yellow,HIGH);
+    }
+  if(distancia < 100){
+    digitalWrite(blue,LOW);
+    digitalWrite(red,HIGH);
+    digitalWrite(yellow,LOW);
+    }    
+}
