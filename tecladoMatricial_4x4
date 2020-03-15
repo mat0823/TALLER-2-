@@ -1,0 +1,38 @@
+# TALLER-2-
+
+#include <Keypad.h>
+#include <Key.h>
+
+const byte fl = 4;
+const byte cl = 4;
+
+char matriz[fl][cl] =
+{
+  {'1','2','3','A'},
+  {'4','5','6','B'},
+  {'7','8','9','C'},
+  {'*','0','#','D'}
+};
+
+byte pinesFl[fl]{2,3,4,5};
+byte pinesCl[cl]{8,9,10,11};
+
+Keypad teclado = Keypad( makeKeymap(matriz), pinesFl, pinesFl, fl, cl);
+
+void setup() {
+  
+  Serial.begin(9600);
+
+}
+
+void loop() {
+
+  char presion_tecla = teclado.getKey();
+
+  if (presion_tecla)
+  {
+    Serial.println(presion_tecla);
+    
+  }
+
+}
